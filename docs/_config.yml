@@ -1,0 +1,10 @@
+title: "MINMAX & Sorting Benchmarks"
+description: "Comparison-based algorithm analysis in C++17"
+author: "Nifemi"
+github_username: Nifemi
+baseurl: "/minmax-and-sorting-benchmarks"
+url: "https://Nifemi.github.io"
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+  - jekyll-remote-theme
+show_downloads: true

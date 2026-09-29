@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build -j
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install matplotlib
+        run: pip install matplotlib
+      - name: Run benchmark and plots
+        run: |
+          ./build/bench
+          python3 bench/plot.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plots
+          path: results/*.png
